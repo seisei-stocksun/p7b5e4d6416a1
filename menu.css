@@ -1,0 +1,122 @@
+/* ===== ハンバーガーメニュー / Concept B — In the Background ===== */
+/* 編集的デザインに合わせ、枠を持たない素の三本線にしています */
+
+.hamburger {
+  display: none;
+  position: relative;
+  z-index: 1300;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  margin-left: auto;
+  justify-self: end;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+
+.hamburger span {
+  position: absolute;
+  left: 50%;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  transform: translateX(-50%);
+  transition: transform .4s var(--ease), opacity .2s var(--ease), background .35s var(--ease);
+}
+
+.hamburger span:nth-child(1) { top: 13px; }
+.hamburger span:nth-child(2) { top: 19px; }
+.hamburger span:nth-child(3) { top: 25px; }
+
+.hamburger:hover span { background: var(--accent); }
+
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateX(-50%) translateY(6px) rotate(45deg);
+  background: var(--accent);
+}
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateX(-50%) translateY(-6px) rotate(-45deg);
+  background: var(--accent);
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 20px;
+  padding: 0 clamp(24px, 8vw, 72px);
+  background: var(--paper);
+  transform: translateY(-105%);
+  visibility: hidden;
+  transition: transform .65s var(--ease), visibility 0s linear .65s;
+}
+
+.mobile-menu.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform .65s var(--ease), visibility 0s;
+}
+
+.mobile-menu nav {
+  display: grid;
+  justify-items: start;
+  text-align: left;
+  gap: 18px;
+}
+
+.mobile-menu a {
+  position: relative;
+  font-size: clamp(32px, 10vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -.05em;
+  color: var(--ink);
+  transition: color .3s var(--ease);
+}
+
+.mobile-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .45s var(--ease);
+}
+
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.mobile-menu small {
+  position: absolute;
+  left: clamp(24px, 8vw, 72px);
+  bottom: 30px;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+body.menu-open { overflow: hidden; }
+
+@media (max-width: 980px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+  /* 開いている間もブランドと閉じるボタンを前面に保つ */
+  header { z-index: 1400; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu, .hamburger span, .mobile-menu a::after { transition-duration: .01ms; }
+}
