@@ -40,6 +40,24 @@
 
   $$('.to-top').forEach(btn=>btn.addEventListener('click',()=>scrollTo({top:0,behavior:reduced?'auto':'smooth'})));
 
+  // 見出しの各行（<br>区切り）が幅に収まらない場合、収まるまで文字サイズを縮める
+  const fitHeads=()=>$$('.hero-title,.jp-heading,.page-title,.address h2').forEach(el=>{
+    el.style.fontSize='';
+    const cs=getComputedStyle(el), avail=el.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    const src=el.cloneNode(true); $$('small',src).forEach(s=>s.remove());
+    const segs=el.classList.contains('hero-title')?$$('.line',el).map(l=>l.innerHTML):src.innerHTML.split(/<br\s*\/?>/i);
+    let max=0;
+    segs.forEach(seg=>{
+      const sp=document.createElement('span');
+      sp.innerHTML=seg; sp.style.cssText='position:absolute;visibility:hidden;white-space:nowrap';
+      el.appendChild(sp); max=Math.max(max,sp.getBoundingClientRect().width); sp.remove();
+    });
+    if(avail>0&&max>avail) el.style.fontSize=(parseFloat(cs.fontSize)*avail/max*.97)+'px';
+  });
+  fitHeads();
+  if(document.fonts) document.fonts.ready.then(fitHeads);
+  let fitTimer; addEventListener('resize',()=>{clearTimeout(fitTimer);fitTimer=setTimeout(fitHeads,120)});
+
   const counter=$('[data-count]');
   if(counter&&!reduced){
     const target=Number(counter.dataset.count), start=1900;
