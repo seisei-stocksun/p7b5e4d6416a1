@@ -170,7 +170,15 @@ footer{background:var(--paper-2);border-top:1px solid var(--line);padding:65px 0
 .reveal{opacity:0;transform:translateY(42px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
+/* 見出しが途中で折り返さないよう、カラム幅から文字サイズの上限を計算 */
+@media(min-width:981px){
+  .domain-head .jp-heading{font-size:clamp(40px,calc((min(1480px,100vw - 64px) - 440px) / 8.8),125px)}
+  .history-copy .jp-heading{font-size:min(clamp(46px,6.2vw,92px),calc((min(1480px,100vw - 64px) - 8vw) * .55 / 8.8))}
+  .subsection-grid .jp-heading.is-long{font-size:min(clamp(45px,6vw,86px),calc((min(1480px,100vw - 64px) - 8vw) * .34 / 6.9))}
+  .notice-inner .jp-heading{font-size:clamp(48px,7vw,100px)}
+}
 @media(max-width:980px){
+  .domain-head .jp-heading{font-size:min(8.4vw,calc((100vw - 36px) / 8.8))}
   .wrap{width:calc(100% - 36px)}
   .head{height:72px;grid-template-columns:1fr auto}.head-note{display:none}.nav{gap:15px;font-size:10px}
   .hero{padding-top:105px}.hero-grid,.page-hero-grid{grid-template-columns:1fr;min-height:auto}.hero-copy{min-height:72svh}.hero-visual{min-height:0;height:105vw}.side-label{display:none}
@@ -183,9 +191,9 @@ footer{background:var(--paper-2);border-top:1px solid var(--line);padding:65px 0
 @media(max-width:620px){
   .wrap{width:calc(100% - 28px)}
   .brand small{display:none}.nav a:first-child{display:none}.nav{gap:12px;font-size:9px}
-  .hero-title{font-size:16.8vw}.hero-bottom{grid-template-columns:1fr}.since{margin-top:24px}.since small{text-align:left}
+  .hero-title{font-size:min(16.8vw,calc((100vw - 28px) / 5.9))}.hero-bottom{grid-template-columns:1fr}.since{margin-top:24px}.since small{text-align:left}
   .visual-caption,.page-image-caption{left:25px;right:25px;bottom:24px}.marquee-track{font-size:12px}
-  .section,.subsection{padding:85px 0}.jp-heading{font-size:13vw}.domain-head .jp-heading{font-size:17vw}.domains{padding:95px 0}
+  .section,.subsection{padding:85px 0}.jp-heading{font-size:min(13vw,calc((100vw - 28px) / 8.8))}.domain-head .jp-heading{font-size:min(17vw,calc((100vw - 28px) / 8.8))}.notice-inner .jp-heading{font-size:min(13vw,calc((100vw - 72px) / 8.8))}.domains{padding:95px 0}
   .domain-item{grid-template-columns:42px 1fr 24px;gap:14px;min-height:145px}.domain-item h3{font-size:12vw}.domain-item p{font-size:11px}
   .acc-button{grid-template-columns:95px 1fr 25px}.acc-panel p{padding-left:115px}
   .notice-box{padding:32px 20px}.notice-box::after{width:390px}
