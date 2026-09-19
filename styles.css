@@ -95,7 +95,8 @@ header.is-hidden{transform:translateY(-110%)}
 .history{padding:165px 0}
 .history-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw}
 .big-year{position:sticky;top:130px;align-self:start;font-family:Georgia,"Times New Roman",serif;font-size:clamp(120px,18vw,290px);line-height:.7;letter-spacing:-.1em;color:var(--accent)}
-.history-copy .jp-heading{margin-top:42px}
+.history-copy .jp-heading,.section-copy .jp-heading{margin-top:42px}
+.domain-head .big-year{position:static;margin-bottom:60px}
 .history-copy>.body-small{margin-top:42px;max-width:680px;color:#4f534c;font-size:15px}
 .accordion{margin-top:75px;border-top:1px solid var(--line)}
 .acc-item{border-bottom:1px solid var(--line)}
